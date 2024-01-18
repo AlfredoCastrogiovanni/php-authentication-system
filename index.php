@@ -16,15 +16,20 @@
     <body>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand me-auto" href="index.php">Site</a>
+                <a class="navbar-brand" href="index.php">Site</a>
                 <?php if(empty($_SESSION["name"])) { ?>
-                <a href="login.php">
+                <a href="login.php" class="ms-auto">
                     <button class="btn btn-outline-success me-2">Login</button>
                 </a>
                 <a href="register.php">
                     <button class="btn btn-outline-warning">Register</button>
                 </a>
                 <?php } else { ?>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="user.php">My Profile</a>
+                        </li>
+                    </ul>
                     <span class="navbar-text me-3">
                         Welcome
                         <span class="fw-bold"><?php echo $_SESSION["name"]; ?></span>

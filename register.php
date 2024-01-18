@@ -16,8 +16,8 @@
         var_dump("Failed connection with the database, with error $connection->connect_error" );
     }
 
-    if (isset($_GET['name']) && isset($_GET['surname']) && isset($_GET['email']) && isset($_GET['password'])){
-        register($_GET['name'], $_GET['surname'], $_GET['email'], $_GET['password'], $connection);
+    if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) && isset($_POST['password'])){
+        register($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password'], $connection);
     }
 
     $connection->close();
@@ -44,7 +44,7 @@
 
         <main>
             <div class="container mt-5">
-                <form class="row g-3" action="register.php">
+                <form class="row g-3" action="register.php" method="POST">
                     <div class="col-12">
                         <h1 class="text-center">Register</h1>
                     </div>
