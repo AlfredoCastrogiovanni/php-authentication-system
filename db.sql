@@ -30,11 +30,11 @@ USE `my_db`;
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `surname` text NOT NULL,
-  `email` text NOT NULL,
-  `psw` text NOT NULL
+  `id` SMALLINT NOT NULL,
+  `name` VARCHAR(20) NOT NULL,
+  `surname` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `psw` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
