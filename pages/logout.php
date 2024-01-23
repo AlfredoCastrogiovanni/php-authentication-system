@@ -5,7 +5,7 @@
 
     session_unset();
     session_destroy();
-    header( "refresh:3; url=index.php" );
+    header( "refresh:3; url=../index.php" );
 ?>
 
 <!DOCTYPE html>

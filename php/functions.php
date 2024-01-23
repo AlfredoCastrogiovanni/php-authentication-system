@@ -15,7 +15,7 @@ function login($email, $password, $connection) {
         var_dump($row);
         $_SESSION['id'] = $row['id'];
         $_SESSION['name'] = $row['name'];
-        header("Location: ./index.php");
+        header("Location: ../index.php");
     } else {
         echo "Wrong credentials";
     }
@@ -38,7 +38,7 @@ function register($name, $surname, $email, $password, $connection) {
 
 function getUser($id, $connection) {
     $parametricQuery = $connection->prepare("SELECT * FROM `users` WHERE `id` = ?;");
-    $parametricQuery->bind_param('s', $id);
+    $parametricQuery->bind_param('i', $id);
     $parametricQuery->execute();
     $results = $parametricQuery->get_result();
 
@@ -51,13 +51,14 @@ function changePsw($id, $oldPsw, $newPsw, $connection) {
     }
 
     $parametricQuery = $connection->prepare("SELECT * FROM `users` WHERE `id` = ? AND `psw` = ?;");
-    $parametricQuery->bind_param('ss', $id, $oldPsw);
+    $parametricQuery->bind_param('is', $id, $oldPsw);
     $parametricQuery->execute();
     $results = $parametricQuery->get_result();
 
     if ($results->num_rows > 0) {
-        $parametricQuery = $connection->prepare("UPDATE `users` SET `psw`= ? WHERE `id`= ?;");
+        $parametricQuery = $connection->prepare("UPDATE `users` SET `psw` = ? WHERE `id` = ?;");
         $parametricQuery->bind_param('si', $newPsw, $id);
+        $parametricQuery->execute();
         header("Location: ./user.php");
     } else {
         echo "Wrong Password";

@@ -1,14 +1,10 @@
 <?php
-    require_once __DIR__ . '//functions.php';
+    require_once __DIR__ . '/../php/functions.php';
+    require_once __DIR__ . '/../php/costants.php';
 
     if (session_status() === PHP_SESSION_NONE){
         session_start();
     }
-
-    define('DB_ADDRESS', 'localhost:3306');
-    define('DB_USERNAME', 'root');
-    define('DB_PASSWORD', 'root');
-    define('DB_NAME', 'my_db');
 
     $connection = new mysqli(DB_ADDRESS, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
@@ -30,7 +26,7 @@
     <body>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand me-auto" href="index.php">Site</a>
+                <a class="navbar-brand me-auto" href="../index.php">Site</a>
                 <a href="register.php">
                     <button class="btn btn-outline-warning">Register</button>
                 </a>
