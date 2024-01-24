@@ -5,20 +5,21 @@ function login($email, $password, $connection) {
         session_start();
     }
 
-    $parametricQuery = $connection->prepare("SELECT * FROM `users` WHERE `email` = ? AND `psw` = ?;");
-    $parametricQuery->bind_param('ss', $email, $password);
+    $parametricQuery = $connection->prepare("SELECT * FROM `users` WHERE `email` = ?");
+    $parametricQuery->bind_param('s', $email);
     $parametricQuery->execute();
     $results = $parametricQuery->get_result();
 
     if ($results->num_rows > 0) {
         $row = $results->fetch_assoc();
-        var_dump($row);
-        $_SESSION['id'] = $row['id'];
-        $_SESSION['name'] = $row['name'];
-        header("Location: ../index.php");
-    } else {
-        echo "Wrong credentials";
+
+        if(password_verify($password, $row['psw'])) {
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['name'] = $row['name'];
+            header("Location: ../index.php");
+        }
     }
+    echo "Wrong credentials";
 }
 
 function register($name, $surname, $email, $password, $connection) {
@@ -26,8 +27,10 @@ function register($name, $surname, $email, $password, $connection) {
         session_start();
     }
 
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+
     $parametricQuery = $connection->prepare("INSERT INTO users (name, surname, email, psw) VALUES (?, ?, ?, ?)");
-    $parametricQuery->bind_param('ssss', $name, $surname, $email, $password);
+    $parametricQuery->bind_param('ssss', $name, $surname, $email, $hash);
 
     if(!$parametricQuery->execute()) {
         echo 'error';
