@@ -62,7 +62,7 @@
                                     <span class="fw-bold">Email: </span> <span><?php echo $user['email']; ?></span>
                                 </div>
                                 <div class="mb-3">
-                                    <span class="fw-bold">Password: </span> <span>********</span>
+                                    <span class="fw-bold">Password: </span> <span><?php echo randomStars(); ?></span>
                                 </div>
                                 <div class="mb-3">
                                     <a href="changePsw.php">

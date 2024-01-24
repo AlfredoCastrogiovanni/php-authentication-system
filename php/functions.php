@@ -66,5 +66,13 @@ function changePsw($id, $oldPsw, $newPsw, $connection) {
     } else {
         echo "Wrong Password";
     }
+}
 
+function randomStars() {
+    $starsNumber = rand(5, 10);
+    $stars = '';
+    for($i=0; $i < $starsNumber; $i++) {
+        $stars .= '*';
+    }
+    return $stars;
 }
